@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django File Feed</title>
+    
+</head>
+<body>
+  
+    <table>
+     
+        {% for file in files %}
+            <tr>
+                <td>{{ file }}</td>
+                <!-- <td>{{ file.title }}</td>
+                <td>{{ file.dateTimeOfUpload }}</td>
+                <td><a href="{{ file.upFile }}">RSS FEED</a></td> -->
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
