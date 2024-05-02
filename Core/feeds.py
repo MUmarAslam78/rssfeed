@@ -51,7 +51,7 @@ class createfeed(Feed):
                                 'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'
                                 }
                 
-                response = requests.get(obj,headers= headers) 
+                response = requests.get(obj,headers= headers, timeout=60) 
                 description = BeautifulSoup(response.content, "html.parser") 
 
                 return description
@@ -105,7 +105,7 @@ def checkfile(self,upFile):
                                 'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'
                                 }
                 urls=a,
-                response = requests.get(a,headers= headers) 
+                response = requests.get(a,headers= headers, timeout=60) 
                 desc = BeautifulSoup(response.content, "html.parser") 
                 ti = desc.title.string
                 f = feedgenerator.Atom1Feed(
