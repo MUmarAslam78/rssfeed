@@ -7,8 +7,6 @@ import sys
 from urllib import response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-import requests
-from wsgiref import headers
 from bs4 import BeautifulSoup
 from django.contrib.syndication.views import Feed
 from django.template.defaultfilters import truncatewords
@@ -23,6 +21,7 @@ import csv
 import ntpath
 
 from Core import models
+from security import safe_requests
 
 
         
@@ -51,7 +50,7 @@ class createfeed(Feed):
                                 'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'
                                 }
                 
-                response = requests.get(obj,headers= headers) 
+                response = safe_requests.get(obj,headers= headers) 
                 description = BeautifulSoup(response.content, "html.parser") 
 
                 return description
@@ -105,7 +104,7 @@ def checkfile(self,upFile):
                                 'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'
                                 }
                 urls=a,
-                response = requests.get(a,headers= headers) 
+                response = safe_requests.get(a,headers= headers) 
                 desc = BeautifulSoup(response.content, "html.parser") 
                 ti = desc.title.string
                 f = feedgenerator.Atom1Feed(
